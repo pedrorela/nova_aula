@@ -1,4 +1,5 @@
-# app.py  •  Dashboard Gapminder (versão com +4 gráficos)
+# app.py  •  Dashboard Gapminder (link: https://nova-aula.onrender.com/)
+
 import streamlit as st
 import plotly.express as px
 
@@ -27,7 +28,7 @@ cont_escolhidos       = st.sidebar.multiselect("Continente",
                                                continentes,
                                                default=continentes)
 
-# 🔹 NOVO – seleção opcional de países (para o gráfico de linha)
+#– seleção opcional de países (para o gráfico de linha)
 todos_paises      = df["country"].unique().tolist()
 paises_escolhidos = st.sidebar.multiselect(
     "País(es) (para o gráfico de evolução)",
@@ -47,14 +48,14 @@ df_sel = df[(df["year"] == ano_escolhido) &
 st.title("🌍 Dashboard Gapminder – visualizações extras")
 
 # ==================================================
-# ABA 1 — Visão Geral (dois gráficos originais)
+# ABA 1 — Visão Geral
 # ==================================================
 aba1, aba2, aba3 = st.tabs(["Visão Geral", "Comparações", "Evolução temporal"])
 
 with aba1:
     col1, col2 = st.columns(2)
 
-    # --- Gráfico 1 (origem do seu código)
+    # --- Gráfico 1
     with col1:
         st.subheader("PIB per capita × Expectativa de Vida")
         fig_disp = px.scatter(
@@ -67,7 +68,7 @@ with aba1:
         )
         st.plotly_chart(fig_disp, use_container_width=True)
 
-    # --- Gráfico 2 (origem do seu código)
+    # --- Gráfico 2
     with col2:
         st.subheader("Mapa — Expectativa de Vida")
         fig_mapa = px.choropleth(
@@ -82,7 +83,7 @@ with aba1:
 # ABA 2 — Comparações (3º e 4º gráficos)
 # ==================================================
 with aba2:
-    # 🔹 NOVO Gráfico 3  -----------------------------
+    # Gráfico 3  -----------------------------
     st.subheader("Top 10 países por PIB per Capita")
     top10 = (df_sel.sort_values("gdpPercap", ascending=False)
                    .head(10)
@@ -97,7 +98,7 @@ with aba2:
 
     st.divider()
 
-    # 🔹 NOVO Gráfico 4  -----------------------------
+    # Gráfico 4  -----------------------------
     st.subheader("Distribuição da População por Continente")
     pop_cont = (df_sel.groupby("continent")["pop"]
                       .sum()
@@ -110,7 +111,7 @@ with aba2:
     st.plotly_chart(fig_pie, use_container_width=True)
 
 # ==================================================
-# ABA 3 — Evolução temporal (5º gráfico)
+# ABA 3 — Evolução temporal 
 # ==================================================
 with aba3:
     st.subheader("Evolução da Expectativa de Vida")
@@ -126,7 +127,7 @@ with aba3:
     st.plotly_chart(fig_line, use_container_width=True)
 
 # --------------------------------------------------
-# Tabela (opcional — pode ficar em um expander)
+# Tabela 
 # --------------------------------------------------
 with st.expander("🔍 Ver tabela de dados filtrados"):
     st.dataframe(df_sel.reset_index(drop=True), use_container_width=True)
