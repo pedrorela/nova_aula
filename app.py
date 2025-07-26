@@ -1,6 +1,6 @@
 # app.py  •  Dashboard Gapminder (simples)
 import streamlit as st
-import pip.express as px
+import plotly.express as px
 
 # ------------------------------------------------
 # Configurações da página
